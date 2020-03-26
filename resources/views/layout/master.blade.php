@@ -52,6 +52,10 @@
                             <a class="nav-link" href="{{ route('wisata.index') }}"
                                 ><div class="sb-nav-link-icon"><i class="far fa-list-alt"></i></div>
                                 Data Wisata</a>
+                                <a class="nav-link" href="{{ route('wilayah.index') }}"
+                                ><div class="sb-nav-link-icon"><i class="far fa-list-alt"></i></div>
+                                Data Wilayah</a>
+
 
                         </div>
                     </div>
