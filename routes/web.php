@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', 'AdminController@admin');
-Route::get('user', 'UserController');
-
-Route::get('wisata', 'WisataController');
+Route::resource('dashboard', 'AdminController');
+Route::resource('user', 'UserController');
+Route::resource('wisata', 'WisataController');
