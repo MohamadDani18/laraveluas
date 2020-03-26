@@ -16,6 +16,6 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', 'AdminController@admin');
-Route::get('/user', 'UserController@index');
+Route::get('user', 'UserController');
 
-Route::get('/wisata', 'WisataController@index');
+Route::get('wisata', 'WisataController');
