@@ -10,6 +10,12 @@
     <li class="breadcrumb-item active">Users</li>
 </ol>
 
+@if ($message = Session::get('success'))
+<div class="alert alert-success" role="alert">
+    <span>{{ $message }}</span>
+</div>
+@endif
+
 <a href="{{ route('user.create') }}" class="btn btn-primary mb-2">Tambah Data</a>
 
 
@@ -27,12 +33,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>                
+                    @php
+                    $no = 1;
+                @endphp
+                @foreach ($user as $u)
+                <tr>
+                    <td>{{$no++}}</td>
+                    <td>{{$u->name}}</td>
+                    <td>{{$u->email}}</td>
+                    <td>
+                        <form action="{{ route('user.destroy', [$u->id]) }}" method="post">
+                            <a href="{{ route('user.edit', [$u->id])}}" class="btn btn-warning btn-sm">Edit</a>
+                            
+
+                            @csrf
+                            {{ method_field('DELETE') }}
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach              
                 </tbody>
             </table>
         </div>

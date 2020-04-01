@@ -22,13 +22,13 @@
     <div class="card-header"><i class="far fa-list-alt mr-1"></i>Data Wisata</div>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
                         <th>Deskripsi</th>
-                        <th>Alamat</th>
+                        <th>Wilayah</th>
                         <th>Jam Buka</th>
                         <th>Jam Tutup</th>
                         <th>Gambar</th>
@@ -44,7 +44,7 @@
                         <td>{{$no++}}</td>
                         <td>{{$w->nama}}</td>
                         <td>{{$w->deskripsi}}</td>
-                        <td>{{$w->alamat}}</td>
+                        <td>{{$w->wilayah->nama}}</td>
                         <td>{{$w->jam_buka}}</td>
                         <td>{{$w->jam_tutup}}</td>
                         <td>

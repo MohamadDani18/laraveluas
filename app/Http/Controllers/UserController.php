@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use App\User;
 
 class UserController extends Controller
 {
@@ -13,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.user');
+        $user = User::all();
+        return view('users.user', ['user' => $user]);
     }
 
     /**
@@ -34,7 +37,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User;
+        $user->name= $request->name;
+        $user->email= $request->email;
+        $user->password= Crypt::encrypt($request->password);
+
+        $user->save();
+
+        return redirect('user')->with(['success' => 'Data berhasil di simpan !']);
     }
 
     /**
@@ -56,7 +66,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::where('id',$id)->get();
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -68,7 +79,15 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $user->name= $request->name;
+        $user->email= $request->email;
+        $user->password= Crypt::encrypt($request->password);
+
+        $user->save();
+
+        return redirect('user.user')->with(['success' => 'Data berhasil di update !']);
     }
 
     /**
@@ -79,6 +98,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return redirect('user')->with(['success' => 'Data berhasil di delete !']);
     }
 }

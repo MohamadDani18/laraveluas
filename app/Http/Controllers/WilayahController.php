@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Wilayah;
+use App\Wisata;
 
 class WilayahController extends Controller
 {
@@ -54,7 +55,9 @@ class WilayahController extends Controller
      */
     public function show($id)
     {
-        //
+        $wisata = Wisata::where('wilayah_id',$id)->get();
+        $wilayah = Wilayah::where('id',$id)->get();
+        return view('wilayah.detail', ['wilayah' => $wilayah], ['wisata' => $wisata]);
     }
 
     /**

@@ -25,8 +25,17 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6">
                         <div class="form-group">
-                            <label>Alamat :</label>
-                            <input type="text" name="alamat" class="form-control" value="{{$w->alamat}}" autocomplete="off">
+                            <label>Wilayah :</label>
+                            <select name="wilayah_id" class="form-control" id="">
+                                    <option value="">Pilih Wilayah</option>
+                                @foreach ($wilayah as $item)
+                                    <option value="{{$item->id}}"
+                                    @if ($w->wilayah_id == $item->id)
+                                        selected
+                                    @endif
+                                        >{{$item->nama}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6">

@@ -8,4 +8,10 @@ class wisata extends Model
 {
     //
     protected $table = 'wisata';
+
+    //relasi tabel wilayah
+    public function wilayah()
+    {
+        return $this->belongsTo('App\Wilayah');
+    }
 }

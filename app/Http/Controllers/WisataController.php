@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Wisata;
+use App\Wilayah;
 
 use Illuminate\Http\Request;
 
@@ -29,7 +30,9 @@ class WisataController extends Controller
      */
     public function create()
     {
-        return view('wisatas.create');
+        //mengambil relasi wilayah
+        $wilayah = Wilayah::all();
+        return view('wisatas.create', ['wilayah' => $wilayah]);
     }
 
     /**
@@ -43,7 +46,7 @@ class WisataController extends Controller
         $wisata = new Wisata;
         $wisata->nama = $request->nama;
         $wisata->deskripsi = $request->deskripsi;
-        $wisata->alamat = $request->alamat;
+        $wisata->wilayah_id = $request->wilayah_id;
         $wisata->jam_buka = $request->jam_buka;
         $wisata->jam_tutup = $request->jam_tutup;
 
@@ -84,8 +87,10 @@ class WisataController extends Controller
      */
     public function edit($id)
     {
+        //mengambil relasi wilayah
+        $wilayah = Wilayah::all();
         $wisata = Wisata::where('id',$id)->get();
-        return view('wisatas.edit', ['wisata' => $wisata]);
+        return view('wisatas.edit', ['wisata' => $wisata], ['wilayah' => $wilayah] );
     }
 
     /**
@@ -101,7 +106,7 @@ class WisataController extends Controller
          $wisata = Wisata::findOrFail($id);
          $wisata->nama = $request->nama;
          $wisata->deskripsi = $request->deskripsi;
-         $wisata->alamat = $request->alamat;
+         $wisata->wilayah_id = $request->wilayah_id;
          $wisata->jam_buka = $request->jam_buka;
          $wisata->jam_tutup = $request->jam_tutup;
 
