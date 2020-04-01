@@ -87,7 +87,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect('user.user')->with(['success' => 'Data berhasil di update !']);
+        return redirect('user')->with(['success' => 'Data berhasil di update !']);
     }
 
     /**
