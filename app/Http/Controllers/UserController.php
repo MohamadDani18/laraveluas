@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 use App\User;
+use DataTables;
 
 class UserController extends Controller
 {
@@ -13,10 +13,30 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = User::all();
-        return view('users.user', ['user' => $user]);
+        // $user = User::all();
+        // return view('users.user', ['user' => $user]);
+
+        if($request->ajax()){
+            $data = User::latest()->get();
+            return DataTables::of($data)->addIndexColumn()
+                ->addColumn('action', function($data){ 
+                    $c = csrf_field();
+                    return '
+                        <form action="'.route('user.destroy', $data->id).'" method="post" 
+                        id="data'. $data->id.'">
+                        '.$c.'
+                            <input type="hidden" name="_method" value="DELETE">
+                        </form>
+                            <a href="'.route('user.edit', $data->id).'" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i><span>&nbsp;Edit</span></a>
+                            <button onclick="deleteData('. $data->id .')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp;Delete</button>
+                        ';
+                })
+            ->RawColumns(['action'])
+            ->make(true);
+        }
+        return view('users.user');
     }
 
     /**
@@ -40,7 +60,7 @@ class UserController extends Controller
         $user = new User;
         $user->name= $request->name;
         $user->email= $request->email;
-        $user->password= Crypt::encrypt($request->password);
+        $user->password= bcrypt($request->password);
 
         $user->save();
 
@@ -83,7 +103,7 @@ class UserController extends Controller
 
         $user->name= $request->name;
         $user->email= $request->email;
-        $user->password= Crypt::encrypt($request->password);
+        $user->password= bcrypt($request->password);
 
         $user->save();
 
