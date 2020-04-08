@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 Route::resource('dashboard', 'AdminController');
 Route::resource('user', 'UserController');
 Route::resource('wisata', 'WisataController');

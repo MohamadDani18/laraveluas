@@ -10,11 +10,11 @@
     <li class="breadcrumb-item active">Users</li>
 </ol>
 
-@if ($message = Session::get('success'))
+{{-- @if ($message = Session::get('success'))
 <div class="alert alert-success" role="alert">
     <span>{{ $message }}</span>
 </div>
-@endif
+@endif --}}
 
 <a href="{{ route('user.create') }}" class="btn btn-primary mb-2"><i class="fas fa-fw fa-plus mr-1"></i>Tambah Data</a>
 
@@ -51,18 +51,18 @@
             ]
           });
         });
-    // function deleteRow(id) {
-    //     swal({
-    //         title: "Are you sure?",
-    //         text: "Once deleted, you will not be able to recover this data!",
-    //         icon: "warning",
-    //         buttons: true,
-    //         dangerMode: true,
-    //     }).then((willDelete) => {
-    //         if (willDelete) {
-    //             $('#data-' + id).submit();
-    //         }
-    //     })
-    // }
+    function deleteData(id) {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                $('#data' + id).submit();
+            }
+        })
+    }
 </script>
 @endsection

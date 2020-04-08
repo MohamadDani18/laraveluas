@@ -8,10 +8,12 @@
         <meta name="author" content="" />
         <title>@yield('title')</title>
         {{-- Style Css --}}
-        <link href="/sbadmin/dist/css/styles.css" rel="stylesheet" />
+        <link href="{{ asset('sbadmin/dist/css/styles.css') }}" rel="stylesheet" />
         {{-- DataTables --}}
-        <link href="/sbadmin/dist/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-        <script src="/sbadmin/dist/js/jquery-3.4.1.min.js"></script>
+        <link href="{{ asset('sbadmin/dist/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+        <script src="{{ asset('sbadmin/dist/js/jquery-3.4.1.min.js') }}"></script>
+        {{-- SweatAlert --}}
+        <script src="{{ asset('sbadmin/dist/sweetalert/sweetalert.min.js') }}"></script>
         {{-- Fonts --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
     </head>
@@ -100,5 +102,7 @@
         {{-- DataTables --}}
         <script src="/sbadmin/dist/js/jquery.dataTables.min.js"></script>
         <script src="/sbadmin/dist/js/dataTables.bootstrap4.min.js"></script>
+        {{-- SweatAlert --}}
+        @include('sweet::alert')
     </body>
 </html>

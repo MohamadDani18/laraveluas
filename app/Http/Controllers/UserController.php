@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use DataTables;
+use SweetAlert;
+
 
 class UserController extends Controller
 {
@@ -64,7 +66,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect('user')->with(['success' => 'Data berhasil di simpan !']);
+        return redirect('user')->with('success' , 'Data Inserted!');
     }
 
     /**
@@ -107,7 +109,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect('user')->with(['success' => 'Data berhasil di update !']);
+        return redirect('user')->with('success', 'Data Updated!');
     }
 
     /**
@@ -119,6 +121,6 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::destroy($id);
-        return redirect('user')->with(['success' => 'Data berhasil di delete !']);
+        return redirect('user')->with('success' , 'Data Deleted!');
     }
 }
